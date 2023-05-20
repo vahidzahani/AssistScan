@@ -65,13 +65,12 @@
             // 
             // button1
             // 
-            this.button1.Enabled = false;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.Location = new System.Drawing.Point(494, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(132, 42);
+            this.button1.Size = new System.Drawing.Size(144, 42);
             this.button1.TabIndex = 1;
             this.button1.Text = "Scan image";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -83,9 +82,9 @@
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button2.Location = new System.Drawing.Point(494, 58);
+            this.button2.Location = new System.Drawing.Point(494, 125);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(132, 42);
+            this.button2.Size = new System.Drawing.Size(144, 42);
             this.button2.TabIndex = 1;
             this.button2.Text = "Load image";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -97,9 +96,9 @@
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button3.Location = new System.Drawing.Point(494, 104);
+            this.button3.Location = new System.Drawing.Point(494, 77);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(132, 42);
+            this.button3.Size = new System.Drawing.Size(144, 42);
             this.button3.TabIndex = 1;
             this.button3.Text = "Save image";
             this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -122,9 +121,9 @@
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
             this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button5.Location = new System.Drawing.Point(494, 150);
+            this.button5.Location = new System.Drawing.Point(494, 171);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(132, 42);
+            this.button5.Size = new System.Drawing.Size(144, 42);
             this.button5.TabIndex = 1;
             this.button5.Text = "Print";
             this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -175,7 +174,7 @@
             // 
             // button8
             // 
-            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button8.Location = new System.Drawing.Point(494, 331);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(99, 34);

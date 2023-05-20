@@ -371,37 +371,56 @@ namespace AssistScan
             image.Save(pathString+@"\"+uniqueName + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg); // or use ImageFormat.Bmp or ImageFormat.Png
 
         }
+        private string fn_uniqname()
+        {
+            DateTime now = DateTime.Now;
+            string uniqueName = $"{now.Year}-{now.Month}-{now.Day}_{now.Hour}-{now.Minute}-{now.Second}-{now.Millisecond}";
+            return (uniqueName);
+
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            
-            // create a new instance of the WIA CommonDialog class
-            WIA.CommonDialog dialog = new WIA.CommonDialog();
+            string folderName = "tmpfolder_export"; // the name of the folder you want to create
 
-            // display the scanner selection dialog
-            Device device = dialog.ShowSelectDevice(WiaDeviceType.ScannerDeviceType, true, false);
+            string pathString = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, folderName); // create the full path to the folder
 
-            if (device != null)
-            {
-                // create a new instance of the WIA Item class
-                Item item = device.Items[1];
+            var dialog = new WIA.CommonDialog();
+            var file = dialog.ShowAcquireImage(WIA.WiaDeviceType.ScannerDeviceType);
+            var str_tmp = pathString + @"\" + fn_uniqname() + "." + file.FileExtension;
+            file.SaveFile(str_tmp);
 
-                // set the image format and resolution
-                SetWIAProperty(item.Properties, "6146", 1);  // 1 = BMP format
-                SetWIAProperty(item.Properties, "6147", 300);  // 300 DPI
+            Image image = Image.FromFile(str_tmp);
+            // Set the Image property of the PictureBox to the loaded image
+            pictureBox1.Image = image;
 
-                // scan the image and save it to a MemoryStream
-                ImageFile image = (ImageFile)dialog.ShowTransfer(item, "{B96B3CAE-0728-11D3-9D7B-0000F81EF32E}", false);
-                MemoryStream stream = new MemoryStream((byte[])image.FileData.get_BinaryData());
 
-                // load the image from the MemoryStream into the picture box
-                pictureBox1.Image = Image.FromStream(stream);
+            //// create a new instance of the WIA CommonDialog class
+            //WIA.CommonDialog dialog = new WIA.CommonDialog();
 
-                // clean up the resources
-                image = null;
-                stream.Dispose();
-            }
+            //// display the scanner selection dialog
+            //Device device = dialog.ShowSelectDevice(WiaDeviceType.ScannerDeviceType, true, false);
+
+            //if (device != null)
+            //{
+            //    // create a new instance of the WIA Item class
+            //    Item item = device.Items[1];
+
+            //    // set the image format and resolution
+            //    SetWIAProperty(item.Properties, "6146", 1);  // 1 = BMP format
+            //    SetWIAProperty(item.Properties, "6147", 300);  // 300 DPI
+
+            //    // scan the image and save it to a MemoryStream
+            //    ImageFile image = (ImageFile)dialog.ShowTransfer(item, "{B96B3CAE-0728-11D3-9D7B-0000F81EF32E}", false);
+            //    MemoryStream stream = new MemoryStream((byte[])image.FileData.get_BinaryData());
+
+            //    // load the image from the MemoryStream into the picture box
+            //    pictureBox1.Image = Image.FromStream(stream);
+
+            //    // clean up the resources
+            //    image = null;
+            //    stream.Dispose();
+            //}
 
         }
 
