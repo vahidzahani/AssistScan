@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Printing;
 using System.Drawing.Imaging;
@@ -381,52 +376,169 @@ namespace AssistScan
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string folderName = "tmpfolder_export"; // the name of the folder you want to create
+            this.Enabled = false;
+            try
+            {
+                string folderName = "tmpfolder_export"; // the name of the folder you want to create
+                string pathString = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, folderName); // create the full path to the folder
 
-            string pathString = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, folderName); // create the full path to the folder
+                var dialog = new WIA.CommonDialog();
+                var file = dialog.ShowAcquireImage(WIA.WiaDeviceType.ScannerDeviceType);
 
-            var dialog = new WIA.CommonDialog();
-            var file = dialog.ShowAcquireImage(WIA.WiaDeviceType.ScannerDeviceType);
-            var str_tmp = pathString + @"\" + fn_uniqname() + "." + file.FileExtension;
-            file.SaveFile(str_tmp);
+                var str_tmp = pathString + @"\" + fn_uniqname() + "." + file.FileExtension;
+                file.SaveFile(str_tmp);
 
-            Image image = Image.FromFile(str_tmp);
-            // Set the Image property of the PictureBox to the loaded image
-            pictureBox1.Image = image;
+                Image image = Image.FromFile(str_tmp);
+                // Set the Image property of the PictureBox to the loaded image
+                pictureBox1.Image = image;
+                pictureBox2.Image = image;
+            }
+            catch (Exception)
+            {
 
+                MessageBox.Show("Error from scanner");
+            }
+            this.Enabled = true;
 
-            //// create a new instance of the WIA CommonDialog class
-            //WIA.CommonDialog dialog = new WIA.CommonDialog();
-
-            //// display the scanner selection dialog
-            //Device device = dialog.ShowSelectDevice(WiaDeviceType.ScannerDeviceType, true, false);
-
-            //if (device != null)
-            //{
-            //    // create a new instance of the WIA Item class
-            //    Item item = device.Items[1];
-
-            //    // set the image format and resolution
-            //    SetWIAProperty(item.Properties, "6146", 1);  // 1 = BMP format
-            //    SetWIAProperty(item.Properties, "6147", 300);  // 300 DPI
-
-            //    // scan the image and save it to a MemoryStream
-            //    ImageFile image = (ImageFile)dialog.ShowTransfer(item, "{B96B3CAE-0728-11D3-9D7B-0000F81EF32E}", false);
-            //    MemoryStream stream = new MemoryStream((byte[])image.FileData.get_BinaryData());
-
-            //    // load the image from the MemoryStream into the picture box
-            //    pictureBox1.Image = Image.FromStream(stream);
-
-            //    // clean up the resources
-            //    image = null;
-            //    stream.Dispose();
-            //}
 
         }
 
         private void SetWIAProperty(WIA.Properties properties, string v1, int v2)
         {
             throw new NotImplementedException();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+        
+        private void timer_auto_Tick(object sender, EventArgs e)
+        {
+
+            if (chk_auto.Checked == true)
+            {
+                timer_auto.Enabled = false;
+                fn_check_auto_scan();
+                timer_auto.Enabled = true;
+            }
+            else label2.Text = "Not Active";
+                        
+        }
+        private void fn_check_auto_scan()
+        {
+            string strPath= @"C:\scaner_q";
+            label2.Text = DateTime.Now.ToString();
+            string[] files = Directory.GetFiles(strPath,"*.txt");
+            textBox1.Clear();
+            foreach (var item in files)
+            {
+                textBox1.Text+= item + System.Environment.NewLine;
+            }
+
+
+            timer_auto.Enabled = false;
+            foreach (var item in files)
+            {
+                
+                //string pathString = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, strPath); // create the full path to the folder
+
+                fn_fast_scan(strPath + @"\" + Path.GetFileNameWithoutExtension(item) + ".jpg");
+                File.Delete(item);
+
+            }
+            timer_auto.Enabled = true;
+
+
+        }
+        private void fn_fast_scan(string fname) {
+            string pp=System.IO.Path.GetDirectoryName(fname);
+            
+            this.Enabled = false;
+
+            pictureBox1.InitialImage = null;
+            pictureBox2.InitialImage = null;
+
+            if (File.Exists(fname)) { File.Delete(fname); }
+
+            var deviceManager = new DeviceManager();
+            DeviceInfo scannerDeviceInfo = null;
+
+            // پیدا کردن دستگاه اسکنر
+            foreach (DeviceInfo deviceInfo in deviceManager.DeviceInfos)
+            {
+                if (deviceInfo.Type == WiaDeviceType.ScannerDeviceType)
+                {
+                    scannerDeviceInfo = deviceInfo;
+                    break;
+                }
+            }
+
+            if (scannerDeviceInfo != null)
+            {
+                Device scannerDevice = scannerDeviceInfo.Connect();
+
+                if (scannerDevice != null)
+                {
+                    Item scannerItem = scannerDevice.Items[1];
+
+                    //SetDefaultScannerSettings(scannerItem);
+
+                    ImageFile image = (ImageFile)scannerItem.Transfer(FormatID.wiaFormatJPEG);
+
+                    // ذخیره تصویر اسکن شده
+                    if (File.Exists(fname))
+                        File.Delete(fname);
+
+                    image.SaveFile(fname);
+
+                    if (pp != @"C:\scaner_q")
+                    {
+                        Image img = Image.FromFile(fname);
+                        pictureBox1.Image = img;
+                        pictureBox2.Image = pictureBox1.Image;
+                    }
+            }
+                else
+                {
+                    MessageBox.Show("دستگاه اسکنر موجود نیست.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("هیچ دستگاه اسکنر موجود نیست.");
+            }
+
+            this.Enabled = true;
+        }
+
+        private static void SetDefaultScannerSettings(Item item)
+        {
+            // مثال: تنظیم رزولوشن به 300 دی‌پی‌آی (DPI)
+            Property resolutionProperty = item.Properties["6147"]; // 6147 به معنای ویژگی رزولوشن در WIA است
+            if (resolutionProperty != null)
+            {
+                resolutionProperty.set_Value(300);
+            }
+
+            // مثال: تنظیم حالت رنگی به رنگی
+            Property colorProperty = item.Properties["6146"]; // 6146 به معنای ویژگی حالت رنگی در WIA است
+            if (colorProperty != null)
+            {
+                colorProperty.set_Value(WiaImageIntent.ColorIntent);
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+            fn_fast_scan(@"tmpfolder_export\scan_image.jpg");
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            pictureBox2.Image.RotateFlip(RotateFlipType.Rotate90FlipXY);
+            pictureBox2.Invalidate();
         }
     }
 }

@@ -11,3 +11,17 @@ C:\Users\vahid\Desktop\Project_asist_scan\AssistScan\AssistScan\obj\Debug\Intero
 C:\Users\vahid\Desktop\Project_asist_scan\AssistScan\AssistScan\obj\Debug\AssistScan.csproj.ResolveComReference.cache
 C:\Users\vahid\Desktop\Project_asist_scan\AssistScan\AssistScan\bin\Debug\AssistScan.exe.config
 C:\Users\vahid\Desktop\Project_asist_scan\AssistScan\AssistScan\obj\Debug\AssistScan.csproj.SuggestedBindingRedirects.cache
+C:\Users\goodby\Desktop\AssistScan\1\AssistScan\AssistScan\AssistScan\bin\Debug\AssistScan.exe.config
+C:\Users\goodby\Desktop\AssistScan\1\AssistScan\AssistScan\AssistScan\bin\Debug\AssistScan.exe
+C:\Users\goodby\Desktop\AssistScan\1\AssistScan\AssistScan\AssistScan\bin\Debug\AssistScan.pdb
+C:\Users\goodby\Desktop\AssistScan\1\AssistScan\AssistScan\AssistScan\bin\Debug\Interop.WIA.dll
+C:\Users\goodby\Desktop\AssistScan\1\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.csproj.AssemblyReference.cache
+C:\Users\goodby\Desktop\AssistScan\1\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.csproj.SuggestedBindingRedirects.cache
+C:\Users\goodby\Desktop\AssistScan\1\AssistScan\AssistScan\AssistScan\obj\Debug\Interop.WIA.dll
+C:\Users\goodby\Desktop\AssistScan\1\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.csproj.ResolveComReference.cache
+C:\Users\goodby\Desktop\AssistScan\1\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.Form1.resources
+C:\Users\goodby\Desktop\AssistScan\1\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.Properties.Resources.resources
+C:\Users\goodby\Desktop\AssistScan\1\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.csproj.GenerateResource.cache
+C:\Users\goodby\Desktop\AssistScan\1\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.csproj.CoreCompileInputs.cache
+C:\Users\goodby\Desktop\AssistScan\1\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.exe
+C:\Users\goodby\Desktop\AssistScan\1\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.pdb
