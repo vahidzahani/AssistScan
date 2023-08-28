@@ -428,6 +428,9 @@ namespace AssistScan
         private void fn_check_auto_scan()
         {
             string strPath= @"C:\scaner_q";
+            if (!Directory.Exists(strPath)) {
+                Directory.CreateDirectory(strPath);
+            }
             label2.Text = DateTime.Now.ToString();
             string[] files = Directory.GetFiles(strPath,"*.txt");
             textBox1.Clear();

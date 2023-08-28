@@ -45,10 +45,10 @@
             this.button8 = new System.Windows.Forms.Button();
             this.chk_auto = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.timer_auto = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.timer_auto = new System.Windows.Forms.Timer(this.components);
             this.button9 = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.button10 = new System.Windows.Forms.Button();
@@ -203,6 +203,8 @@
             // chk_auto
             // 
             this.chk_auto.AutoSize = true;
+            this.chk_auto.Checked = true;
+            this.chk_auto.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chk_auto.Location = new System.Drawing.Point(6, 19);
             this.chk_auto.Name = "chk_auto";
             this.chk_auto.Size = new System.Drawing.Size(74, 17);
@@ -224,20 +226,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Auto scanner for Apache";
             // 
-            // timer_auto
+            // textBox1
             // 
-            this.timer_auto.Enabled = true;
-            this.timer_auto.Interval = 1000;
-            this.timer_auto.Tick += new System.EventHandler(this.timer_auto_Tick);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 39);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(185, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Path for checking : c:\\saner_q\\$id.txt";
+            this.textBox1.Location = new System.Drawing.Point(6, 78);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(182, 67);
+            this.textBox1.TabIndex = 6;
             // 
             // label2
             // 
@@ -250,13 +245,20 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Not Active";
             // 
-            // textBox1
+            // label1
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 78);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(182, 67);
-            this.textBox1.TabIndex = 6;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 39);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(185, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Path for checking : c:\\saner_q\\$id.txt";
+            // 
+            // timer_auto
+            // 
+            this.timer_auto.Enabled = true;
+            this.timer_auto.Interval = 1000;
+            this.timer_auto.Tick += new System.EventHandler(this.timer_auto_Tick);
             // 
             // button9
             // 
