@@ -39,3 +39,17 @@ C:\Users\goodby\Desktop\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.cs
 C:\Users\goodby\Desktop\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.csproj.CoreCompileInputs.cache
 C:\Users\goodby\Desktop\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.exe
 C:\Users\goodby\Desktop\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.pdb
+D:\DATA\project\C#\AssistScan\AssistScan\AssistScan\AssistScan\bin\Debug\AssistScan.exe.config
+D:\DATA\project\C#\AssistScan\AssistScan\AssistScan\AssistScan\bin\Debug\AssistScan.exe
+D:\DATA\project\C#\AssistScan\AssistScan\AssistScan\AssistScan\bin\Debug\AssistScan.pdb
+D:\DATA\project\C#\AssistScan\AssistScan\AssistScan\AssistScan\bin\Debug\Interop.WIA.dll
+D:\DATA\project\C#\AssistScan\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.csproj.AssemblyReference.cache
+D:\DATA\project\C#\AssistScan\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.csproj.SuggestedBindingRedirects.cache
+D:\DATA\project\C#\AssistScan\AssistScan\AssistScan\AssistScan\obj\Debug\Interop.WIA.dll
+D:\DATA\project\C#\AssistScan\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.csproj.ResolveComReference.cache
+D:\DATA\project\C#\AssistScan\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.Form1.resources
+D:\DATA\project\C#\AssistScan\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.Properties.Resources.resources
+D:\DATA\project\C#\AssistScan\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.csproj.GenerateResource.cache
+D:\DATA\project\C#\AssistScan\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.csproj.CoreCompileInputs.cache
+D:\DATA\project\C#\AssistScan\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.exe
+D:\DATA\project\C#\AssistScan\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.pdb
