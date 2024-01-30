@@ -489,11 +489,15 @@ namespace AssistScan
 
                     ImageFile image = (ImageFile)scannerItem.Transfer(FormatID.wiaFormatJPEG);
 
+
                     // ذخیره تصویر اسکن شده
                     if (File.Exists(fname))
                         File.Delete(fname);
 
                     image.SaveFile(fname);
+
+                    CompressImage(fname, @"c:\vahid.jpg", 50L); // مثلاً کیفیت 50
+
 
                     if (pp != @"C:\scaner_q")
                     {
@@ -513,6 +517,33 @@ namespace AssistScan
             }
 
             this.Enabled = true;
+        }
+
+        public static void CompressImage(string sourcePath, string destinationPath, long quality)
+        {
+            using (Image image = Image.FromFile(sourcePath))
+            {
+                EncoderParameters encoderParameters = new EncoderParameters(1);
+                encoderParameters.Param[0] = new EncoderParameter(Encoder.Quality, quality);
+
+                ImageCodecInfo jpegCodec = GetEncoderInfo("image/jpeg");
+
+                image.Save(destinationPath, jpegCodec, encoderParameters);
+            }
+        }
+
+        // تابع کمکی برای دریافت کدک مربوط به یک نوع تصویر
+        private static ImageCodecInfo GetEncoderInfo(string mimeType)
+        {
+            ImageCodecInfo[] encoders = ImageCodecInfo.GetImageEncoders();
+            foreach (ImageCodecInfo encoder in encoders)
+            {
+                if (encoder.MimeType == mimeType)
+                {
+                    return encoder;
+                }
+            }
+            return null;
         }
 
         private static void SetDefaultScannerSettings(Item item)
