@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Diagnostics;
 using WIA;
+using System.Threading;
 
 namespace AssistScan
 {
@@ -162,7 +163,7 @@ namespace AssistScan
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            this.Text += Application.ProductVersion.ToString();
         }
 
 
@@ -291,7 +292,7 @@ namespace AssistScan
         {
             printPictureBox(pictureBox2,"A5");
         }
-
+        
         private void convertPictureBoxToGrayscale(PictureBox pictureBox)
         {
             // Get the image from the PictureBox control
@@ -396,12 +397,13 @@ namespace AssistScan
             catch (Exception)
             {
 
-                MessageBox.Show("Error from scanner");
+                textBoxLog.Text+="Error from scanner \r\n";
             }
             this.Enabled = true;
 
 
         }
+
 
         private void SetWIAProperty(WIA.Properties properties, string v1, int v2)
         {
@@ -446,7 +448,7 @@ namespace AssistScan
                 
                 //string pathString = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, strPath); // create the full path to the folder
 
-                fn_fast_scan(strPath + @"\" + Path.GetFileNameWithoutExtension(item) + ".jpg");
+                fn_fast_scan(strPath + @"\" + Path.GetFileNameWithoutExtension(item) , "jpg");
                 File.Delete(item);
 
             }
@@ -454,83 +456,119 @@ namespace AssistScan
 
 
         }
-        private void fn_fast_scan(string fname) {
-            string pp=System.IO.Path.GetDirectoryName(fname);
-            
-            this.Enabled = false;
+        private void CompressImage(Image sourceImage, int imageQuality, string savePath)
+        {
 
-            pictureBox1.InitialImage = null;
-            pictureBox2.InitialImage = null;
-
-            if (File.Exists(fname)) { File.Delete(fname); }
-
-            var deviceManager = new DeviceManager();
-            DeviceInfo scannerDeviceInfo = null;
-
-            // پیدا کردن دستگاه اسکنر
-            foreach (DeviceInfo deviceInfo in deviceManager.DeviceInfos)
+            try
             {
-                if (deviceInfo.Type == WiaDeviceType.ScannerDeviceType)
+                ImageCodecInfo jpegCodec = null;
+                EncoderParameter imageQualitysParameter = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, imageQuality);
+                ImageCodecInfo[] allCodecs = ImageCodecInfo.GetImageEncoders();
+                EncoderParameters codecParameter = new EncoderParameters(1);
+                codecParameter.Param[0] = imageQualitysParameter;
+                for (int i = 0; i < allCodecs.Length; i++)
                 {
-                    scannerDeviceInfo = deviceInfo;
-                    break;
-                }
-            }
-
-            if (scannerDeviceInfo != null)
-            {
-                Device scannerDevice = scannerDeviceInfo.Connect();
-
-                if (scannerDevice != null)
-                {
-                    Item scannerItem = scannerDevice.Items[1];
-
-                    //SetDefaultScannerSettings(scannerItem);
-
-                    ImageFile image = (ImageFile)scannerItem.Transfer(FormatID.wiaFormatJPEG);
-
-
-                    // ذخیره تصویر اسکن شده
-                    if (File.Exists(fname))
-                        File.Delete(fname);
-
-                    image.SaveFile(fname);
-
-                    CompressImage(fname, @"c:\vahid.jpg", 50L); // مثلاً کیفیت 50
-
-
-                    if (pp != @"C:\scaner_q")
+                    if (allCodecs[i].MimeType == "image/jpeg")
                     {
-                        Image img = Image.FromFile(fname);
-                        pictureBox1.Image = img;
-                        pictureBox2.Image = pictureBox1.Image;
+                        jpegCodec = allCodecs[i];
+                        break;
                     }
+                }
+                if (File.Exists(savePath)) { File.Delete(savePath); }
+
+
+                sourceImage.Save(savePath, jpegCodec, codecParameter);
+                sourceImage.Dispose();
+                //sourceImage = null;
+
             }
+            catch(Exception e)
+            {
+                throw e;
+                // Release the semaphore
+            }
+        }
+        private void fn_fast_scan(string fname,string extension) {
+            
+                //string fname2 = fname + "." + extension;
+                string tmp_fname = @"C:\scaner_q\TMP.JPG";
+                //string pp=System.IO.Path.GetDirectoryName(fname2);
+
+                this.Enabled = false;
+
+                pictureBox1.InitialImage = null;
+                pictureBox2.InitialImage = null;
+
+
+
+
+
+
+                if (File.Exists(tmp_fname)) { File.Delete(tmp_fname); }
+
+                var deviceManager = new DeviceManager();
+                DeviceInfo scannerDeviceInfo = null;
+
+                // پیدا کردن دستگاه اسکنر
+                foreach (DeviceInfo deviceInfo in deviceManager.DeviceInfos)
+                {
+                    if (deviceInfo.Type == WiaDeviceType.ScannerDeviceType)
+                    {
+                        scannerDeviceInfo = deviceInfo;
+                        break;
+                    }
+                }
+
+                if (scannerDeviceInfo != null)
+                {
+                    Device scannerDevice = scannerDeviceInfo.Connect();
+
+                    if (scannerDevice != null)
+                    {
+                        Item scannerItem = scannerDevice.Items[1];
+
+                        SetDefaultScannerSettings(scannerItem);
+
+                        ImageFile image = (ImageFile)scannerItem.Transfer(FormatID.wiaFormatJPEG);
+
+
+                        // ذخیره تصویر اسکن شده
+                        if (File.Exists(tmp_fname)) { File.Delete(tmp_fname); }
+
+                        image.SaveFile(tmp_fname);
+
+                        //CompressImage(Image.FromFile(fname), 50, @"f:\aaa.jpg");
+                        Image img = Image.FromFile(tmp_fname);
+                        CompressImage(img, 50, fname + "." + extension);
+                        if (File.Exists(tmp_fname)) { File.Delete(tmp_fname); }
+
+
+                        //if (pp != @"C:\scaner_q")
+                        //{
+                        //    Image img = Image.FromFile(fname);
+                        //    pictureBox1.Image = img;
+                        //    pictureBox2.Image = pictureBox1.Image;
+                        //}
+                    }
+                    else
+                    {
+                        //MessageBox.Show("دستگاه اسکنر موجود نیست.");
+                    textBoxLog.Text += "دستگاه اسکنر موجود نیست. \r\n";
+                        
+
+                    }
+                }
                 else
                 {
-                    MessageBox.Show("دستگاه اسکنر موجود نیست.");
+                    //MessageBox.Show("هیچ دستگاه اسکنر موجود نیست.");
+                    textBoxLog.Text += "هیچ دستگاه اسکنر موجود نیست. \r\n";
                 }
-            }
-            else
-            {
-                MessageBox.Show("هیچ دستگاه اسکنر موجود نیست.");
-            }
 
-            this.Enabled = true;
+                this.Enabled = true;
+            
         }
 
-        public static void CompressImage(string sourcePath, string destinationPath, long quality)
-        {
-            using (Image image = Image.FromFile(sourcePath))
-            {
-                EncoderParameters encoderParameters = new EncoderParameters(1);
-                encoderParameters.Param[0] = new EncoderParameter(Encoder.Quality, quality);
-
-                ImageCodecInfo jpegCodec = GetEncoderInfo("image/jpeg");
-
-                image.Save(destinationPath, jpegCodec, encoderParameters);
-            }
-        }
+      
 
         // تابع کمکی برای دریافت کدک مربوط به یک نوع تصویر
         private static ImageCodecInfo GetEncoderInfo(string mimeType)
@@ -566,13 +604,18 @@ namespace AssistScan
         private void button9_Click(object sender, EventArgs e)
         {
 
-            fn_fast_scan(@"tmpfolder_export\scan_image.jpg");
+            //fn_fast_scan(@"tmpfolder_export\scan_image","jpg");
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
             pictureBox2.Image.RotateFlip(RotateFlipType.Rotate90FlipXY);
             pictureBox2.Invalidate();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
