@@ -62,6 +62,7 @@ C:\Users\sony\Desktop\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.cspr
 C:\Users\sony\Desktop\AssistScan\AssistScan\AssistScan\obj\Debug\Interop.WIA.dll
 C:\Users\sony\Desktop\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.csproj.ResolveComReference.cache
 C:\Users\sony\Desktop\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.Form1.resources
+C:\Users\sony\Desktop\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.Form2.resources
 C:\Users\sony\Desktop\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.Properties.Resources.resources
 C:\Users\sony\Desktop\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.csproj.GenerateResource.cache
 C:\Users\sony\Desktop\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.csproj.CoreCompileInputs.cache

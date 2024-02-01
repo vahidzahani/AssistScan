@@ -283,11 +283,7 @@ namespace AssistScan
 
 
         }
-        private void button5_Click(object sender, EventArgs e)
-        {
-            printPictureBox(pictureBox1,"A4");
-        }
-
+      
         private void button6_Click_1(object sender, EventArgs e)
         {
             printPictureBox(pictureBox2,"A5");
@@ -616,6 +612,12 @@ namespace AssistScan
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Form2 frm = new Form2();
+                frm.ShowDialog();
         }
     }
 }

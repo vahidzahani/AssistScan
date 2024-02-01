@@ -135,7 +135,6 @@
             // 
             // button5
             // 
-            this.button5.Enabled = false;
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
             this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -143,7 +142,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(207, 42);
             this.button5.TabIndex = 1;
-            this.button5.Text = "Print";
+            this.button5.Text = "Convert";
             this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
