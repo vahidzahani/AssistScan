@@ -6,6 +6,16 @@ namespace AssistScan
 {
     internal class Class1
     {
+        public static bool Checkfile(string file)
+        {
+            string ext = Path.GetExtension(file).ToLower();
+            string[] arr_ext = { "jpg", "bmp", "png" };
+            foreach (string item in arr_ext)
+            {
+                if (("." + item) == ext) return true;
+            }
+            return false;
+        }
         public void CompressImage(Image sourceImage, int imageQuality, string savePath)
         {
             try

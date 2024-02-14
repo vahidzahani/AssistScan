@@ -21,13 +21,19 @@ namespace AssistScan
         int x2;
         int y2;
         private bool isDrawing = false;
-        
 
+        string str_pathlastopenimage = "";
         public Form1()
         {
             InitializeComponent();
         }
-
+        private void openimageFastImage(string fname)
+        {
+            Image image = Image.FromFile(fname);
+            pictureBox1.Image = image;
+            button8.Enabled = true;
+            str_pathlastopenimage=Path.GetDirectoryName(fname);
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -39,11 +45,10 @@ namespace AssistScan
             // Show the OpenFileDialog and wait for the user to select a file
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                // Load the selected file into an Image object
-                Image image = Image.FromFile(openFileDialog1.FileName);
-
-                // Set the Image property of the PictureBox to the loaded image
-                pictureBox1.Image = image;
+                //Image image = Image.FromFile(openFileDialog1.FileName);
+                openimageFastImage(openFileDialog1.FileName);
+                //pictureBox1.Image = image;
+                //button8.Enabled = true;
             }
         }
 
@@ -332,35 +337,50 @@ namespace AssistScan
 
         private void button8_Click(object sender, EventArgs e)
         {
-            string folderName = "tmpfolder_export"; // the name of the folder you want to create
-            string pathString = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, folderName); // create the full path to the folder
-
-            // Check if the folder exists and create it if it doesn't
-            if (!Directory.Exists(pathString))
-            {
-                Directory.CreateDirectory(pathString);
-                Console.WriteLine("Folder created at: " + pathString);
-            }
-            else
-            {
-                Console.WriteLine("Folder already exists at: " + pathString);
+            if (str_pathlastopenimage == "") {
+                MessageBox.Show("input image please first or use save image");
+                return;
             }
 
-            // open the folder using the default system file explorer
-            Process.Start(pathString);
 
-
-
-            // get the current date and time
             DateTime now = DateTime.Now;
+            string uniqueName = $"{now.Year}{now.Month}{now.Day}{now.Hour}{now.Minute}{now.Second}";
 
-            // create a unique name based on the current date and time
-            string uniqueName = $"{now.Year}-{now.Month}-{now.Day}_{now.Hour}-{now.Minute}-{now.Second}-{now.Millisecond}";
+            
+            //MessageBox.Show(uniqueName);
+            
 
+           
+
+            
+            // Get the file name and extension from the SaveFileDialog
+            string fileName = str_pathlastopenimage+ @"\"+ uniqueName+".jpg";
+
+            // Get the image from the PictureBox control
+            
             Image image = pictureBox2.Image;
+            
+            // Save the image to the selected file in the selected format
+            image.Save(fileName, System.Drawing.Imaging.ImageFormat.Jpeg); // or use ImageFormat.Bmp or ImageFormat.Png
+
+            DialogResult result = MessageBox.Show("saved To : " + fileName + @"\r\n Open this Folder ?", "message", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                System.Diagnostics.Process.Start("explorer.exe", str_pathlastopenimage);
+
+            }
+            
+
+
+
+
+
+
+
+          
 
             // Save the image to the selected file in the selected format
-            image.Save(pathString+@"\"+uniqueName + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg); // or use ImageFormat.Bmp or ImageFormat.Png
+            //image.Save(pathString+@"\"+uniqueName + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg); // or use ImageFormat.Bmp or ImageFormat.Png
 
         }
         private string fn_uniqname()
@@ -618,6 +638,28 @@ namespace AssistScan
         {
             Form2 frm = new Form2();
                 frm.ShowDialog();
+        }
+
+        private void button2_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] droppedFiles = (string[])e.Data.GetData(DataFormats.FileDrop);
+            foreach (string file in droppedFiles)
+            {
+                //string filename=getFileName(file);
+                if (Class1.Checkfile(file) == true) { 
+                    openimageFastImage(file);
+                }
+
+                // Set the Image property of the PictureBox to the loaded image
+            }
+        }
+
+        private void button2_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop, false) == true)
+            {
+                e.Effect = DragDropEffects.All;
+            }
         }
     }
 }

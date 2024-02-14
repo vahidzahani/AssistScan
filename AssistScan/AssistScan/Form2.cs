@@ -17,16 +17,7 @@ namespace AssistScan
         }
 
        
-        private bool Checkfile(string file)
-        {
-            string ext=Path.GetExtension(file).ToLower();
-            string[] arr_ext = {"jpg", "bmp","png"};
-            foreach (string item in arr_ext)
-            {
-                if (("." + item) == ext) return true;
-            }
-            return false;
-        }
+        
         private string getFileName(string path)
         {
             
@@ -40,7 +31,7 @@ namespace AssistScan
             foreach (string file in droppedFiles)
             {
                 //string filename=getFileName(file);
-                if (Checkfile(file)==true)
+                if (Class1.Checkfile(file)==true)
                     listBox1.Items.Add(file);
             }
         }
