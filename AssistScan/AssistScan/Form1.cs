@@ -346,15 +346,20 @@ namespace AssistScan
             DateTime now = DateTime.Now;
             string uniqueName = $"{now.Year}{now.Month}{now.Day}{now.Hour}{now.Minute}{now.Second}";
 
-            
+
             //MessageBox.Show(uniqueName);
-            
 
-           
+
 
             
+            string foldername = textBox2.Text;
+            string pp = str_pathlastopenimage + @"\" + foldername;
+            if (Directory.Exists(pp)==false)
+            {
+                Directory.CreateDirectory(pp);
+            }
             // Get the file name and extension from the SaveFileDialog
-            string fileName = str_pathlastopenimage+ @"\"+ uniqueName+".jpg";
+            string fileName = str_pathlastopenimage+ @"\" + foldername + "\\" + uniqueName+".jpg";
 
             // Get the image from the PictureBox control
             
@@ -362,13 +367,19 @@ namespace AssistScan
             
             // Save the image to the selected file in the selected format
             image.Save(fileName, System.Drawing.Imaging.ImageFormat.Jpeg); // or use ImageFormat.Bmp or ImageFormat.Png
+            //MessageBox.Show("saved");
 
-            DialogResult result = MessageBox.Show("saved To : " + fileName + @"\r\n Open this Folder ?", "message", MessageBoxButtons.YesNo);
-            if (result == DialogResult.Yes)
-            {
-                System.Diagnostics.Process.Start("explorer.exe", str_pathlastopenimage);
+            string tmp = this.Text;
+            this.Text = "   SAVING ";
+            Thread.Sleep(100);
+            this.Text = tmp;
 
-            }
+            //DialogResult result = MessageBox.Show("saved To : " + fileName + @"\r\n Open this Folder ?", "message", MessageBoxButtons.YesNo);
+            //if (result == DialogResult.Yes)
+            //{
+            //    System.Diagnostics.Process.Start("explorer.exe", str_pathlastopenimage);
+
+            //}
             
 
 
@@ -660,6 +671,24 @@ namespace AssistScan
             {
                 e.Effect = DragDropEffects.All;
             }
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F4)
+            {
+                button8_Click(sender, e);
+            }
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
