@@ -38,6 +38,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.button1 = new System.Windows.Forms.Button();
+            this.CHKInvert = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,11 +46,11 @@
             // 
             this.listBox1.AllowDrop = true;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
+            this.listBox1.ItemHeight = 19;
             this.listBox1.Location = new System.Drawing.Point(12, 55);
             this.listBox1.Margin = new System.Windows.Forms.Padding(4);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(626, 356);
+            this.listBox1.Size = new System.Drawing.Size(626, 346);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             this.listBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox1_DragDrop);
@@ -62,7 +63,7 @@
             this.textOut.Location = new System.Drawing.Point(13, 436);
             this.textOut.Margin = new System.Windows.Forms.Padding(4);
             this.textOut.Name = "textOut";
-            this.textOut.Size = new System.Drawing.Size(501, 23);
+            this.textOut.Size = new System.Drawing.Size(501, 27);
             this.textOut.TabIndex = 1;
             this.textOut.Text = "c:\\out";
             this.textOut.TextChanged += new System.EventHandler(this.textOut_TextChanged);
@@ -87,7 +88,7 @@
             this.textQuality.Location = new System.Drawing.Point(73, 463);
             this.textQuality.Name = "textQuality";
             this.textQuality.ReadOnly = true;
-            this.textQuality.Size = new System.Drawing.Size(33, 23);
+            this.textQuality.Size = new System.Drawing.Size(33, 27);
             this.textQuality.TabIndex = 3;
             this.textQuality.Text = "50";
             this.textQuality.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -97,7 +98,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 466);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 16);
+            this.label1.Size = new System.Drawing.Size(73, 21);
             this.label1.TabIndex = 4;
             this.label1.Text = "Quality :";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -107,7 +108,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 416);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 16);
+            this.label2.Size = new System.Drawing.Size(93, 21);
             this.label2.TabIndex = 4;
             this.label2.Text = "Destetion :";
             this.label2.Click += new System.EventHandler(this.label1_Click);
@@ -141,7 +142,7 @@
             this.trackBar1.Maximum = 100;
             this.trackBar1.Minimum = 1;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(402, 45);
+            this.trackBar1.Size = new System.Drawing.Size(402, 56);
             this.trackBar1.TabIndex = 6;
             this.trackBar1.Value = 50;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
@@ -160,12 +161,23 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // CHKInvert
+            // 
+            this.CHKInvert.AutoSize = true;
+            this.CHKInvert.Location = new System.Drawing.Point(113, 19);
+            this.CHKInvert.Name = "CHKInvert";
+            this.CHKInvert.Size = new System.Drawing.Size(119, 25);
+            this.CHKInvert.TabIndex = 7;
+            this.CHKInvert.Text = "Invert Color";
+            this.CHKInvert.UseVisualStyleBackColor = true;
+            // 
             // Form2
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(645, 514);
+            this.Controls.Add(this.CHKInvert);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label2);
@@ -200,5 +212,6 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox CHKInvert;
     }
 }

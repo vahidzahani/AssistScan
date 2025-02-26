@@ -61,12 +61,12 @@ namespace AssistScan
 
         private void btnConvert_Click(object sender, EventArgs e)
         {
-
             try
             {
                 string outpath = textOut.Text;
                 if (!Directory.Exists(outpath))
                     Directory.CreateDirectory(outpath);
+
                 Class1 cls = new Class1();
                 progressBar1.Visible = true;
                 progressBar1.Maximum = listBox1.Items.Count;
@@ -83,6 +83,13 @@ namespace AssistScan
                         string outfile = outpath + @"\" + fname + ".jpg";
 
                         Image img = Image.FromFile(item.ToString());
+
+                        // اگر چک باکس CHKInvert فعال باشد، اینورت رنگ‌ها را انجام می‌دهیم
+                        if (CHKInvert.Checked)
+                        {
+                            img = InvertImageColors(img);
+                        }
+
                         cls.CompressImage(img, Quality, outfile);
                         processedCount++;
                     }
@@ -105,10 +112,33 @@ namespace AssistScan
             finally
             {
                 // Perform cleanup tasks
-                progressBar1.Visible=false;
+                progressBar1.Visible = false;
+            }
+        }
+
+        private Image InvertImageColors(Image original)
+        {
+            // تبدیل تصویر به Bitmap برای پردازش پیکسل‌ها
+            Bitmap bmp = new Bitmap(original);
+
+            for (int x = 0; x < bmp.Width; x++)
+            {
+                for (int y = 0; y < bmp.Height; y++)
+                {
+                    // دریافت رنگ پیکسل
+                    Color pixelColor = bmp.GetPixel(x, y);
+
+                    // محاسبه رنگ معکوس
+                    Color invertedColor = Color.FromArgb(255 - pixelColor.R, 255 - pixelColor.G, 255 - pixelColor.B);
+
+                    // اعمال رنگ معکوس به پیکسل
+                    bmp.SetPixel(x, y, invertedColor);
+                }
             }
 
+            return bmp;
         }
+
 
         private void btnClear_Click(object sender, EventArgs e)
         {
@@ -142,6 +172,11 @@ namespace AssistScan
         {
 
             System.Diagnostics.Process.Start("explorer.exe", textOut.Text);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

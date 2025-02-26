@@ -82,3 +82,4 @@ C:\Users\ADFT\Desktop\myproject\AssistScan\AssistScan\AssistScan\obj\Debug\Assis
 C:\Users\ADFT\Desktop\myproject\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.csproj.CoreCompileInputs.cache
 C:\Users\ADFT\Desktop\myproject\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.exe
 C:\Users\ADFT\Desktop\myproject\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.pdb
+C:\Users\ADFT\Desktop\myproject\AssistScan\AssistScan\AssistScan\obj\Debug\AssistScan.csproj.SuggestedBindingRedirects.cache
